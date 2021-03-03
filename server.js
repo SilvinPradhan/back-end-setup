@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === 'development') require('dotenv').config();
 const app = express();
 
 // Middleware
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -22,6 +23,9 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 // Routes
+app.get('/api', (req, res) => {
+	res.json({ message: 'You just hit the End Point' });
+});
 
 // Execute
 const port = process.env.PORT || 8000;
